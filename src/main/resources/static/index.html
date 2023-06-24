@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="./index.css" />
+    <script type="module" defer src="./index.js"></script>
+  </head>
+  <body>
+    <button class="botonCerrarSesion">Cerrar sesión</button>
+    <button class="botonWelcome">Welcome</button>
+    <div class="root">
+      <div class="contenedorForm">
+        <h3 class="formTitle">Inicio de sesión</h3>
+        <form class="form">
+          <div class="formFieldset">
+            <label class="formLabel" for="emailInput">EMAIL</label>
+            <input
+              class="formInput"
+              id="emailInput"
+              name="email"
+              type="email"
+            />
+          </div>
+          <div class="formFieldset">
+            <label class="formLabel" for="contraseniaInput">CONTRASEÑA</label>
+            <input
+              class="formInput"
+              id="contraseniaInput"
+              name="contrasenia"
+              type="text"
+            />
+          </div>
+          <div class="formButtonSection">
+            <button class="formButton">Iniciar Sesión</button>
+          </div>
+        </form>
+
+        <a
+          class="containerButtonRegistrarCuenta"
+          href="http://localhost:8080/redireccionar.html"
+        >
+          <button class="iniciarGoogle">Iniciar con Google</button></a
+        >
+        <a
+          class="containerButtonRegistrarCuenta"
+          href="http://localhost:8080/sign-up.html"
+        >
+          <button class="registrarCuenta">Registrar Cuenta</button></a
+        >
+      </div>
+    </div>
+    <script type="module" defer src="./index.js"></script>
+  </body>
+</html>

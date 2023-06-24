@@ -1,0 +1,61 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: black;
+}
+
+.container {
+  margin: auto;
+  display: flex;
+  height: 200px;
+  width: 400px;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  background-color: black;
+}
+
+.welcomeUser {
+  font-weight: 700;
+  font-size: 24px;
+  color: whitesmoke;
+}
+
+.boton {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  width: 255px;
+  height: 45px;
+  background-color: #4280ef;
+  color: whitesmoke;
+}
+
+.botonCerrarSesion {
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-align: center;
+  background-color: rgb(165, 23, 4);
+  color: whitesmoke;
+  font-size: 18px;
+  width: 150px;
+  height: 40px;
+}
+
+.botonInicio {
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  background-color: rgb(3, 104, 12);
+  color: whitesmoke;
+  font-size: 18px;
+  width: 150px;
+  height: 40px;
+}
