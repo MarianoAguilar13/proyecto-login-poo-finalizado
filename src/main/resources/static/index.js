@@ -91,6 +91,7 @@ function main() {
     localStorage.setItem("userEsAdmin", "");
     localStorage.setItem("nombreUserSesion", "");
     alert("Se ha cerrado la sesión, que tenga un buen día :) ");
+    window.open("http://localhost:8080/logout");
     window.location.href = "index.html";
   });
 }

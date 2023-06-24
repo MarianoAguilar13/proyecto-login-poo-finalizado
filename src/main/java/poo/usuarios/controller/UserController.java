@@ -2,11 +2,7 @@ package poo.usuarios.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 import poo.usuarios.entity.GoogleUser;
@@ -144,7 +140,7 @@ public class UserController {
         }
     }
 
-
+/*
     //Cuando un usuario se registre por google, para obtener su nombre y correo deben utilizar:
 
 
@@ -155,5 +151,5 @@ public class UserController {
     public Object obtenerNombreCompUsuario(OAuth2AuthenticationToken OAuth2AuthenticationToken){
         return OAuth2AuthenticationToken.getPrincipal().getAttributes().get("name"); //Para nombre completo
     }
-
+*/
 }
