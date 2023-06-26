@@ -1,4 +1,6 @@
 function main() {
+  //se chequea que este iniciada la sesion, si esta vacio el mailUserSesion, significa
+  //que no iniciaron sesion y lo redirige hacia el inicio
   if (localStorage.getItem("mailUserSesion") == "") {
     alert(
       "No se ha iniciado sesión, debera iniciar sesión para ingresar a esta página."
@@ -7,6 +9,7 @@ function main() {
   } else {
     const welcomeUserEl = document.querySelector(".welcomeUser");
 
+    //se trae el nombre del usuario, guardado en el localstorage
     const nombre = localStorage.getItem("nombreUserSesion");
 
     welcomeUserEl.textContent = welcomeUserEl.textContent + " " + nombre;
@@ -18,6 +21,7 @@ function main() {
       botonAdmin.style.display = "none";
     }
 
+    //si realiza un click en el boton admin lo redirige hacia la pagina de admin
     botonAdmin.addEventListener("click", async (e) => {
       e.preventDefault();
 
@@ -26,6 +30,7 @@ function main() {
 
     const botonCerrarSesionEl = document.querySelector(".botonCerrarSesion");
 
+    //el boton de cerrar sesion igual que en el index
     botonCerrarSesionEl.addEventListener("click", (e) => {
       e.preventDefault();
       localStorage.setItem("mailUserSesion", "");
@@ -38,6 +43,7 @@ function main() {
 
     const botonInicioEl = document.querySelector(".botonInicio");
 
+    //el boton del inicio te redirige hacia el inicio
     botonInicioEl.addEventListener("click", (e) => {
       e.preventDefault();
 

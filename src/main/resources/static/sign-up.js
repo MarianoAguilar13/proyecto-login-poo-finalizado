@@ -46,6 +46,7 @@ function main() {
     }
   };
 
+  //funcion para validar el campo, con las expresiones y los valores del imput
   const validarCampo = (expresion, input, campo) => {
     if (expresion.test(input.value)) {
       document
@@ -84,6 +85,7 @@ function main() {
     }
   };
 
+  //esto sirve para chequear que la pass y la pass repetida sean iguales
   const validarPassword2 = () => {
     const inputPassword1 = document.getElementById("password");
     const inputPassword2 = document.getElementById("password2");
@@ -125,11 +127,13 @@ function main() {
     }
   };
 
+  //va a recorrer todos los imput y chequear que este validado el dato
   inputs.forEach((input) => {
     input.addEventListener("keyup", validarFormulario);
     input.addEventListener("blur", validarFormulario);
   });
 
+  //se envia el formulario y se chequean todos los datos que existan
   formulario.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -139,6 +143,7 @@ function main() {
       const email = e.target.correo.value;
       const password = e.target.password.value;
 
+      //creo un objeto del tipo usuario como no admin predeterminado
       const user = {
         nombre: nombre,
         apellido: apellido,
@@ -147,13 +152,17 @@ function main() {
         admin: "no",
       };
 
+      //hago el llamado a la api con el fetch post de crear usuario
       const respuesta = await crearUsuario(user);
 
-      console.log(respuesta);
-
-      formulario.reset();
-      alert("El Formulario se envió correctamente.");
-      window.location.href = "index.html";
+      if (respuesta) {
+        formulario.reset();
+        alert("El Formulario se envió correctamente.");
+        window.location.href = "index.html";
+      } else {
+        formulario.reset();
+        alert("Ocurrio un error en la creación del usuario.");
+      }
     } else {
       alert(
         "El Formulario tiene algunos errores y no se envió, asegurese de tener todos los datos ingresados correctamente."
@@ -162,6 +171,7 @@ function main() {
   });
 }
 
+//fetch al endpoint para crear usuarios
 async function crearUsuario(user) {
   console.log(user);
 
@@ -182,9 +192,7 @@ async function crearUsuario(user) {
 
     return respuesta;
   } catch (r) {
-    console.log("este es el error: ", r);
-
-    return r;
+    return null;
   }
 }
 

@@ -1,5 +1,6 @@
 function main() {
-  if (localStorage.getItem("mailUserSesion") == ("no" || "")) {
+  //chequea de si es admin o no
+  if (localStorage.getItem("userEsAdmin") != "si") {
     alert(
       "No tienes permisos de administrador o no se ha iniciado sesión, debera iniciar sesión para ingresar a esta página."
     );
@@ -94,14 +95,18 @@ function main() {
       input.addEventListener("blur", validarFormulario);
     });
 
+    //este es el primer formulario, el de buscar por mail a un usuario
     formSearch.addEventListener("submit", async (e) => {
       e.preventDefault();
       const mailSearch = e.target.mailSearch.value;
 
+      //se llama a la api con el fetch al endpoint que busca por mail a los usuarios
       const respuesta = await buscarUsuarioPorMail(mailSearch);
 
+      //en la respuesta siempre trae una lista de usuario aunque solo es uno
+      //por eso ponemos el [0], que es el primer y unico usuario de la lista,
+      //ya que el mail es unico.
       if (respuesta[0]) {
-        console.log("Esta es la respuesta: ", respuesta);
         const usuario = respuesta;
 
         //guardo todos los datos del usuario buscado por mail en el localstorage
@@ -112,7 +117,6 @@ function main() {
         localStorage.setItem("userPassword", usuario[0].password);
         localStorage.setItem("userAdmin", usuario[0].admin);
 
-        console.log(localStorage.getItem("userNombre"));
         //hago visible lo que estaba none
         formulario.style.display = "grid";
         containerEliminar.style.display = "flex";
@@ -138,6 +142,7 @@ function main() {
       }
     });
 
+    //este el segundo formulario, el del modificar los datos del usuario
     formulario.addEventListener("submit", async (e) => {
       e.preventDefault();
 
@@ -152,6 +157,7 @@ function main() {
         const email = e.target.correo.value;
         const contrasenia = e.target.password.value;
 
+        //creo un objeto usuario para mandarlo a la api
         const usuario = {
           nombre: nombre,
           apellido: apellido,
@@ -175,15 +181,7 @@ function main() {
 
         formulario.reset();
 
-        /*
-      En este evento cuando se hace click en editar, vamos a borrar lo que este en el
-      local estorage, previamente tomando todos los datos que esten guardados ahi,
-      luego enviaremos todos los datos al endpoint patch que va a hacer el update en la bd
-      del usuario con el mail correspondiente (si queremos editar el mail, vamos a necesitar un id
-      sino tenemos que hacer que el mail no se pueda editar)
-      luego de eso daremos la alerta que se edito correctamente y cambiaremos los valores del formulario
-      */
-
+        //ponemos los campos vacios del user en el localstorage
         localStorage.setItem("userId", "");
         localStorage.setItem("userMail", "");
         localStorage.setItem("userNombre", "");
@@ -202,18 +200,16 @@ function main() {
 
     const botonEliminarEl = document.querySelector(".botonEliminar");
 
+    //cuando se hace click en el boton eliminar se eliminara el usuario que se busco
+    //mediante el mail
     botonEliminarEl.addEventListener("click", async (e) => {
-      /*
-      En este evento cuando se hace click en eliminar, vamos a borrar lo que este en el
-      local estorage, previamente tomando el mail que este guardado ahi,
-      ese mail que esta guardado lo enviaremos al endpoint de eliminar usuario de la bd
-      luego de eso daremos la alerta que se elimino y cambiaremos los valores del formulario
-      */
-
       e.preventDefault();
 
+      //obtenemos el id del localstorage que se guardo cuando se recupero el usuario
+      //mediante el mail
       const userId = localStorage.getItem("userId");
 
+      //se llama la api para borrar el usuario
       const respuesta = await eliminarUsuario(userId);
 
       if (respuesta) {
@@ -269,8 +265,6 @@ function main() {
 
 //Hay que ver si le modificamos el mail o no, si se modifica, vamos a necesitar el id
 async function modificarUsuario(usuario, id) {
-  console.log(usuario);
-
   const fetchApi = fetch(`http://localhost:8080/api/users/${id}`, {
     method: "PUT",
     headers: {
@@ -288,16 +282,12 @@ async function modificarUsuario(usuario, id) {
 
     return respuesta;
   } catch (r) {
-    console.log("este es el error: ", r);
-
     return null;
   }
 }
 
 //Hay que ver si le modificamos el mail o no, si se modifica, vamos a necesitar el id
 async function buscarUsuarioPorMail(email) {
-  console.log(email);
-
   const fetchApi = fetch(`http://localhost:8080/api/users/email/${email}`, {
     method: "GET",
     headers: {
@@ -313,8 +303,6 @@ async function buscarUsuarioPorMail(email) {
 
     return respuesta;
   } catch (r) {
-    console.log("este es el error: ", r);
-
     return null;
   }
 }
@@ -340,8 +328,6 @@ async function eliminarUsuario(id) {
       return null;
     }
   } catch (r) {
-    console.log("este es el error: ", r);
-
     return null;
   }
 }

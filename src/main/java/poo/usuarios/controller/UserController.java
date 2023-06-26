@@ -140,16 +140,4 @@ public class UserController {
         }
     }
 
-/*
-    //Cuando un usuario se registre por google, para obtener su nombre y correo deben utilizar:
-
-
-    public Object obtenerNombreUsuario(OAuth2AuthenticationToken OAuth2AuthenticationToken){
-        return OAuth2AuthenticationToken.getPrincipal().getAttributes().get("given_name"); //Para nombre
-    }
-
-    public Object obtenerNombreCompUsuario(OAuth2AuthenticationToken OAuth2AuthenticationToken){
-        return OAuth2AuthenticationToken.getPrincipal().getAttributes().get("name"); //Para nombre completo
-    }
-*/
 }
