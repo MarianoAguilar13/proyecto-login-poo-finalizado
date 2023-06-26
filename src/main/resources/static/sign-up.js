@@ -161,7 +161,7 @@ function main() {
         window.location.href = "index.html";
       } else {
         formulario.reset();
-        alert("Ocurrio un error en la creación del usuario.");
+        alert("Ya existe un usuario con ese mail, por favor ingrese otro.");
       }
     } else {
       alert(
@@ -190,7 +190,13 @@ async function crearUsuario(user) {
 
     const respuesta = await res.json();
 
-    return respuesta;
+    if(respuesta){
+        return respuesta;
+    }else{
+       return null;
+    }
+
+
   } catch (r) {
     return null;
   }

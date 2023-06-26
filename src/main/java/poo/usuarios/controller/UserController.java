@@ -24,9 +24,15 @@ public class UserController {
 
     //Create user
     @PostMapping
-    public ResponseEntity<?> create (@RequestBody User user){
+    public User create (@RequestBody User user){
         //devolvemo el codigo http de crado y
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
+        try{
+            return userService.save(user);
+        } catch (Exception e){
+            System.out.println("La excepcion es la siguiente: " + e);
+            return null;
+        }
+
 
     }
 
